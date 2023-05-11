@@ -15,11 +15,8 @@ public class Product {
 		
 	}
 	
-	public void getProductInfo() {
-		System.out.println("ID: " + id);
-		System.out.println("NAME: " + name);
-		System.out.println("CATEGORY: " + category);
-		System.out.println("PRICE: " + price);
+	public String getProductInfo() {
+		return ("ID: " + id + " " + "NAME: " + name + " " + "CATEGORY: " + category + " " + "PRICE: " + price);
 	}
 
 	public String getProductCategory() {
@@ -34,7 +31,13 @@ public class Product {
 		return price;
 	}
 	
+	public Double setProductPrice(Double price) {
+		return price;
+	}
+	
 	public Long getProductId() {
 		return id;
 	}
+	
+	
 }

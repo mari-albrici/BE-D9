@@ -3,7 +3,9 @@ package exercise;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,17 +15,26 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		//************** OTHER NEEDED THINGS **************
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+		LocalDate date1 = LocalDate.parse("01/02/2021 12:05:00", formatter);
+		LocalDate date2 = LocalDate.parse("01/04/2021 12:05:00", formatter);
+		LocalDate orderTwoOrderDate = LocalDate.parse("15/03/2021 12:05:00", formatter);
+		
 		//************** CREAZIONE CLIENTI **************
 		
-		Costumer marianna = new Costumer(1l, "Marianna", 5);
-		Costumer elisa = new Costumer(2l, "Elisa", 2);
-		Costumer alice = new Costumer(3l, "Alice", 3);
-		Costumer nicola = new Costumer(4l, "Nicola", 2);
-		Costumer virginia = new Costumer(5l, "Virginia", 5);
-		Costumer andrea = new Costumer(6l, "Andrea", 4);
-		Costumer matteo = new Costumer(7l, "Matteo", 1);
-		Costumer emauele = new Costumer(8l, "Emanuele", 1);
-		Costumer greta = new Costumer(9l, "gret", 2);
+		List<Customer> costumers = new ArrayList<Customer>();
+		
+		Customer marianna = new Customer(1l, "Marianna", 5);
+		Customer elisa = new Customer(2l, "Elisa", 2);
+		Customer alice = new Customer(3l, "Alice", 3);
+		Customer nicola = new Customer(4l, "Nicola", 2);
+		Customer virginia = new Customer(5l, "Virginia", 5);
+		Customer andrea = new Customer(6l, "Andrea", 4);
+		Customer matteo = new Customer(7l, "Matteo", 1);
+		Customer emauele = new Customer(8l, "Emanuele", 1);
+		Customer greta = new Customer(9l, "gret", 2);
 		
 		
 		//************** CREAZIONE PRODOTTI **************
@@ -52,24 +63,58 @@ public class Main {
 		
 		//************** CREAZIONE ORDINI **************
 		
-		LocalDate today = new LocalDate(11, 5, 2023);		
+		List<Order> orders = new ArrayList<Order>();
 		
-		Order orderOne = new Order(1l, "sent", );
+		LocalDate today = LocalDate.now();	
+		LocalDate delivery = today.plusDays(5);	
 		
 		
 		
-		//************** EXERCISE 1**************
-		List<String> costsMoreThan100 = products.stream().filter(book -> book.getProductCategory().equals("Books")).filter(book -> book.getProductPrice() > 100).map(Product::getProductName).toList();	
+		Order orderOne = new Order(1l, "sent", today, delivery, products, elisa);
+		Order orderTwo = new Order(2l, "received", orderTwoOrderDate, delivery.minusDays(2), products, elisa);
+		
+		//************** EXERCISE 1 **************
+		
+		List<String> costsMoreThan100 = products.stream()
+				.filter(book -> book.getProductCategory().equals("Books"))
+				.filter(book -> book.getProductPrice() > 100).map(Product::getProductName)
+				.toList();	
+		
 		logger.info("Books that cost more than $100 are: " + costsMoreThan100);
+		
 		
 		//************** EXERCISE 2 **************
 		
+		List<Order> containsBabyProducts = orders.stream()
+                .filter(order -> order.getOrderProducts()
+                		.stream()
+                        .anyMatch(product -> product.getProductCategory().equals("Baby")))
+                .toList();
+		
+		 logger.info("Orders with baby products are: " + containsBabyProducts.toString());
+		 
 		
 		//************** EXERCISE 3 **************
+		 
+	    List<String> discountedProducts = products.stream()
+                .filter(product -> product.getProductCategory().equals("Boys"))
+                .map(product -> {
+                    product.setProductPrice(product.getProductPrice() * 0.9);
+                    return product.getProductInfo();
+                }).toList();
+	    
+	    logger.info("Discounted products: " + discountedProducts);
 		
 		
 		//************** EXERCISE 4 **************
+	    
+	    List<String> tierTwoOrders = orders.stream()
+                .filter(order -> order.getCustomer().getCustomerTier() == 2)
+                .filter(order -> order.getOrderDate().isAfter(date1) && order.getOrderDate().isBefore(date2))
+                .flatMap(Order::getOrderProducts)
+                .collect(Collectors.toList());
 
+	    logger.info("The products ordered by tier 2 clients are: " + tierTwoOrders);
 	}
 
 }

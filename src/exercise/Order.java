@@ -10,16 +10,16 @@ public class Order {
 	private LocalDate orderDate;
 	private LocalDate deliveryDate;
 	private List<Product> products;
-	private Costumer costumer;
+	private Customer customer;
 	
 	
-	public Order(Long id, String status, LocalDate orderDate, LocalDate deliveryDate, List<Product> products, Costumer costumer) {
+	public Order(Long id, String status, LocalDate orderDate, LocalDate deliveryDate, List<Product> products, Customer customer) {
 		this.id = id;
 		this.status = status;
 		this.orderDate = orderDate;
 		this.deliveryDate = deliveryDate;
 		this.products = products;
-		this.costumer = costumer;
+		this.customer = customer;
 	}
 	
 	public Long getOrderId() {
@@ -30,12 +30,24 @@ public class Order {
 		return status;
 	}
 	
-	public LocalDate orderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
 	
-	public LocalDate deliveryDate() {
+	public LocalDate getDeliveryDate() {
 		return deliveryDate;
 	}
+	
+	public List<Product> getOrderProducts(){
+		return products;
+	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+	
+	@Override
+    public String toString() {
+        return ("Order " + id + " - Customer: " + customer.getCustomerName() + " - Products: " + products.toString());
+    }
 }
