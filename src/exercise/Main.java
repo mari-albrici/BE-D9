@@ -26,30 +26,30 @@ public class Main {
 		
 		List<Customer> costumers = new ArrayList<Customer>();
 		
-		Customer marianna = new Customer(1l, "Marianna", 5);
-		Customer elisa = new Customer(2l, "Elisa", 2);
-		Customer alice = new Customer(3l, "Alice", 3);
-		Customer nicola = new Customer(4l, "Nicola", 2);
-		Customer virginia = new Customer(5l, "Virginia", 5);
-		Customer andrea = new Customer(6l, "Andrea", 4);
-		Customer matteo = new Customer(7l, "Matteo", 1);
-		Customer emauele = new Customer(8l, "Emanuele", 1);
-		Customer greta = new Customer(9l, "gret", 2);
+		Customer marianna = new Customer("Marianna", 5);
+		Customer elisa = new Customer("Elisa", 2);
+		Customer alice = new Customer("Alice", 3);
+		Customer nicola = new Customer("Nicola", 2);
+		Customer virginia = new Customer("Virginia", 5);
+		Customer andrea = new Customer("Andrea", 4);
+		Customer matteo = new Customer("Matteo", 1);
+		Customer emauele = new Customer("Emanuele", 1);
+		Customer greta = new Customer("Greta", 2);
 		
 		
 		//************** CREAZIONE PRODOTTI **************
 		
 		List<Product> products = new ArrayList<Product>();
 		
-		Product productOne = new Product(1l, "Ruspa", "Boys", 19.90 );
-		Product productTwo = new Product(2l, "Il Vangelo secondo la scienza", "Books", 120.80 );
-		Product productThree = new Product(3l, "Nappies", "Baby", 24.50 );
-		Product productFour = new Product(4l, "Hot Wheels", "Boys", 3.90 );
-		Product productFive = new Product(5l, "Il Genio non esiste", "Books", 12.90 );
-		Product productSix = new Product(6l, "Binky", "Baby", 3.40 );
-		Product productSeven = new Product(7l, "Pallone", "Boys", 0.90 );
-		Product productEight = new Product(8l, "Toy", "Baby", 19.90 );
-		Product productNine = new Product(9l, "Orgoglio e Pregiudizio", "Books", 19.90 );
+		Product productOne = new Product("Ruspa", "Boys", 19.90 );
+		Product productTwo = new Product("Il genio non esiste", "Books", 120.80 );
+		Product productThree = new Product("Nappies", "Baby", 24.50 );
+		Product productFour = new Product("Hot Wheels", "Boys", 3.90 );
+		Product productFive = new Product("Il metedo mea", "Books", 12.90 );
+		Product productSix = new Product("Binky", "Baby", 3.40 );
+		Product productSeven = new Product("Pallone", "Boys", 0.90 );
+		Product productEight = new Product("Toy", "Baby", 19.90 );
+		Product productNine = new Product("Orgoglio e Pregiudizio", "Books", 19.90 );
 		
 		products.add(productOne);
 		products.add(productTwo);
@@ -108,13 +108,13 @@ public class Main {
 		
 		//************** EXERCISE 4 **************
 	    
-	    List<String> tierTwoOrders = orders.stream()
-                .filter(order -> order.getCustomer().getCustomerTier() == 2)
-                .filter(order -> order.getOrderDate().isAfter(date1) && order.getOrderDate().isBefore(date2))
-                .flatMap(Order::getOrderProducts)
-                .collect(Collectors.toList());
+//	    List<String> tierTwoOrders = orders.stream()
+//                .filter(order -> order.getCustomer().getCustomerTier() == 2)
+//                .filter(order -> order.getOrderDate().isAfter(date1) && order.getOrderDate().isBefore(date2))
+//                .flatMap(Order::getOrderProducts)
+//                .collect(Collectors.toList());
 
-	    logger.info("The products ordered by tier 2 clients are: " + tierTwoOrders);
+//	    logger.info("The products ordered by tier 2 clients are: " + tierTwoOrders);
 	}
 
 }

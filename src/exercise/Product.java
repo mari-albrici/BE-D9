@@ -2,13 +2,12 @@ package exercise;
 
 public class Product {
 	
-	private Long id;
+	private Long id = (long) (Math.random() * 10000);
 	private String name;
 	private String category;
 	private Double price;
 	
-	public Product(Long id, String name, String category, Double price) {
-		this.id = id;
+	public Product(String name, String category, Double price) {
 		this.name = name;
 		this.category = category;
 		this.price = price;
@@ -31,8 +30,8 @@ public class Product {
 		return price;
 	}
 	
-	public Double setProductPrice(Double price) {
-		return price;
+	public Double setProductPrice(Double newPrice) {
+		return this.price = newPrice;
 	}
 	
 	public Long getProductId() {

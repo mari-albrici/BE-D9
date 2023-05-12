@@ -2,12 +2,11 @@ package exercise;
 
 public class Customer {
 
-	private Long id;
+	private Long id = (long) (Math.random() * 10000);
 	private String name;
 	private int tier;
 	
-	public Customer (Long id, String name, int tier) {
-		this.id = id;
+	public Customer ( String name, int tier) {
 		this.name = name;
 		this.tier = tier;
 	}
